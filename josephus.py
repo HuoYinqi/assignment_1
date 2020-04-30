@@ -3,7 +3,7 @@ import csv
 import zipfile
 
 class Person:
-    def __init__(self, name = '', age = 0):
+    def __init__(self, name: str = '', age: int = 0):
         self.name = name
         if age < 0:
             raise ValueError('The value of age can be less than 0')
@@ -17,7 +17,7 @@ class Reader:
         raise NotImplementedError
 
 class TxtReader(Reader):
-    def __init__(self, path):
+    def __init__(self, path: str):
         self.file = open(path)
 
     def __iter__(self):
@@ -35,7 +35,7 @@ class TxtReader(Reader):
         return Person(name, age)
 
 class CSVReader(Reader):
-    def __init__(self, path):
+    def __init__(self, path: str):
         self.csv_file = open(path)
         csv_reader = csv.reader(self.csv_file)
         self.it =  csv_reader.__iter__()
@@ -54,13 +54,13 @@ class CSVReader(Reader):
         return Person(name, age)
 
 class TxtInZipReader(TxtReader):
-    def __init__(self, path, target_file):
+    def __init__(self, path: str, target_file: str):
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
         TxtReader.__init__(self, target_path)
 
 class CSVInZipReader(CSVReader):
-    def __init__(self, path, target_file):    
+    def __init__(self, path: str, target_file :str):    
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
         CSVReader.__init__(self, target_path)
@@ -74,10 +74,10 @@ class JosephusRing:
             for some_one in reader:
                 self.people.append(some_one)
 
-    def append(self, target):
+    def append(self, target: Person):
         self.people.append(target)
 
-    def pop(self, index):
+    def pop(self, index: int):
         if index >= len(self.people):
             raise IndexError
         self.people.pop(index)
