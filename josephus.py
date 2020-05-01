@@ -20,6 +20,10 @@ class TxtReader(Reader):
     def __init__(self, path: str):
         self.file = open(path)
 
+    def __del__(self):
+        if self.file:
+            self.file.close()
+
     def __iter__(self):
         return self
     
