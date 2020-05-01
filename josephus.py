@@ -64,13 +64,13 @@ class TxtInZipReader(TxtReader):
     def __init__(self, path: str, target_file: str):
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
-        TxtReader.__init__(self, target_path)
+        super().__init__(target_path)
 
 class CSVInZipReader(CSVReader):
     def __init__(self, path: str, target_file :str):    
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
-        CSVReader.__init__(self, target_path)
+        super().__init__(target_path)
 
 class JosephusRing:
     def __init__(self, reader = None):
