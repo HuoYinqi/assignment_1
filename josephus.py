@@ -28,21 +28,24 @@ class TxtReader(Reader):
         return self
     
     def __next__(self):
-        row = self.file.readline()
+        row = next(self.file)
         if not row:
-            self.file.close()
             raise StopIteration
         row_ = row.strip()
         item = row_.split(',')
         name = item[0]
-        age = int(item[1])
+        try:
+            age = int(item[1])
+        except ValueError:
+            age = 0
         return Person(name, age)
+    
 
 class CSVReader(Reader):
     def __init__(self, path: str):
         self.csv_file = open(path)
-        csv_reader = csv.reader(self.csv_file)
-        self.it =  csv_reader.__iter__()
+        self.csv_reader = csv.reader(self.csv_file)
+    
     def __del__(self):
         if self.csv_file:
             self.csv_file.close()
@@ -51,13 +54,12 @@ class CSVReader(Reader):
         return self
     
     def __next__(self):
-        try:
-            item = self.it.__next__()
-        except StopIteration:
-            self.csv_file.close()
-            raise StopIteration
+        item = next(self.csv_reader)
         name = item[0]
-        age = int(item[1])
+        try:
+            age = int(item[1])
+        except ValueError:
+            age = 0
         return Person(name, age)
 
 class TxtInZipReader(TxtReader):
