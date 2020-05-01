@@ -43,6 +43,9 @@ class CSVReader(Reader):
         self.csv_file = open(path)
         csv_reader = csv.reader(self.csv_file)
         self.it =  csv_reader.__iter__()
+    def __del__(self):
+        if self.csv_file:
+            self.csv_file.close()
     
     def __iter__(self):
         return self
