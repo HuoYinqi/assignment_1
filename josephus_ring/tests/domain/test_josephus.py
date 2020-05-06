@@ -3,7 +3,7 @@ import pytest
 from collections.abc import Iterable
 
 from josephus_ring.domain.josephus import JosephusRing
-from josephus_ring.shared.person import Person
+from josephus_ring.domain.person import Person
 
 def test_josephus_init_without_parameter():
     jos = JosephusRing()
