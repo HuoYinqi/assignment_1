@@ -1,5 +1,3 @@
-from copy import copy
-
 class JosephusRing:
     def __init__(self, start = 1, step = 1):
         if start < 1:
@@ -24,7 +22,7 @@ class JosephusRing:
 
     def query_list(self):
         ret = []
-        temp = copy(self.people)
+        temp = self.people[:]
         size = len(temp)
         if size == 0:
             return ret
