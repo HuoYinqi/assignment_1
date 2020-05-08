@@ -2,32 +2,34 @@ from copy import copy
 import csv
 import zipfile
 
+from typing import Iterator, List
+
 class Person:
-    def __init__(self, name: str = '', age: int = 0):
+    def __init__(self, name: str = '', age: int = 0) -> None:
         self.name = name
         if age < 0:
             raise ValueError('The value of age can be less than 0')
         self.age = age
 
 class Reader:
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         raise NotImplementedError
 
-    def __next__(self):
+    def __next__(self) -> Person:
         raise NotImplementedError
 
 class TxtReader(Reader):
-    def __init__(self, path: str):
+    def __init__(self, path: str) -> None:
         self.file = open(path)
 
-    def __del__(self):
+    def __del__(self) -> None:
         if self.file:
             self.file.close()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         return self
     
-    def __next__(self):
+    def __next__(self) -> Person:
         row = next(self.file)
         if not row:
             raise StopIteration
@@ -42,18 +44,18 @@ class TxtReader(Reader):
     
 
 class CSVReader(Reader):
-    def __init__(self, path: str):
+    def __init__(self, path: str) -> None:
         self.csv_file = open(path)
         self.csv_reader = csv.reader(self.csv_file)
     
-    def __del__(self):
+    def __del__(self) -> None:
         if self.csv_file:
             self.csv_file.close()
     
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         return self
     
-    def __next__(self):
+    def __next__(self) -> Person:
         item = next(self.csv_reader)
         name = item[0]
         try:
@@ -63,36 +65,36 @@ class CSVReader(Reader):
         return Person(name, age)
 
 class TxtInZipReader(TxtReader):
-    def __init__(self, path: str, target_file: str):
+    def __init__(self, path: str, target_file: str) -> None:
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
         super().__init__(target_path)
 
 class CSVInZipReader(CSVReader):
-    def __init__(self, path: str, target_file :str):    
+    def __init__(self, path: str, target_file :str) -> None:    
         with zipfile.ZipFile(path) as zip_file:
             target_path = zip_file.extract(target_file)
         super().__init__(target_path)
 
 class JosephusRing:
-    def __init__(self, reader = None):
-        self.start = 1
-        self.step = 1
-        self.people = []
+    def __init__(self, reader: Reader = None) -> None:
+        self.start: int = 1
+        self.step: int = 1
+        self.people: List[Person] = []
         if reader:
             for some_one in reader:
                 self.people.append(some_one)
 
-    def append(self, target: Person):
+    def append(self, target: Person) -> None:
         self.people.append(target)
 
-    def pop(self, index: int):
+    def pop(self, index: int) -> None:
         if index >= len(self.people):
             raise IndexError
         self.people.pop(index)
 
-    def quert_list(self):
-        ret = []
+    def quert_list(self) -> List[Person]:
+        ret: List[Person] = []
         temp = copy(self.people)
         size = len(temp)
         if size == 0:
@@ -105,10 +107,10 @@ class JosephusRing:
             ret.append(obj)
         return ret
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         return self
 
-    def __next__(self):
+    def __next__(self) -> Person:
         if not self.people:
             raise StopIteration
         current_index = self.start - 1
