@@ -2,7 +2,7 @@ from copy import copy
 import csv
 import zipfile
 
-from typing import Iterator, List
+from typing import Iterator, List, NoReturn, Optional
 
 class Person:
     def __init__(self, name: str = '', age: int = 0) -> None:
@@ -12,17 +12,17 @@ class Person:
         self.age = age
 
 class Reader:
-    def __iter__(self) -> Iterator:
+    def __iter__(self) -> NoReturn:
         raise NotImplementedError
 
-    def __next__(self) -> Person:
+    def __next__(self) -> NoReturn:
         raise NotImplementedError
 
 class TxtReader(Reader):
-    def __init__(self, path: str) -> None:
+    def __init__(self, path) -> None:
         self.file = open(path)
 
-    def __del__(self) -> None:
+    def __del__(self):
         if self.file:
             self.file.close()
 
@@ -77,7 +77,7 @@ class CSVInZipReader(CSVReader):
         super().__init__(target_path)
 
 class JosephusRing:
-    def __init__(self, reader: Reader = None) -> None:
+    def __init__(self, reader: Optional[Reader] = None) -> None:
         self.start: int = 1
         self.step: int = 1
         self.people: List[Person] = []
@@ -121,7 +121,7 @@ class JosephusRing:
 
 if __name__ == '__main__':
     print('\n从txt文件读取\n')
-    txt_reader = TxtReader('D:\\软件培训\\库\\person.txt')
+    txt_reader = TxtReader('person.txt')
     jos = JosephusRing(txt_reader)
     jos.start = 3
     jos.step = 4
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         print(each.name, each.age)
 
     print('\n从csv文件读取\n')
-    csv_reader = CSVReader('D:\\软件培训\\库\\person.csv')
+    csv_reader = CSVReader('person.csv')
     jos = JosephusRing(csv_reader)
     jos.start = 3
     jos.step = 4
@@ -143,7 +143,7 @@ if __name__ == '__main__':
         print(each.name, each.age)
     
     print('\n从zip文件中的txt文件读取\n')
-    txt_in_zip_reader = TxtInZipReader('D:\\软件培训\\库\\person.zip', 'person.txt')
+    txt_in_zip_reader = TxtInZipReader('person.zip', 'person.txt')
     jos = JosephusRing(txt_in_zip_reader)
     jos.start = 3
     jos.step = 4
@@ -154,7 +154,7 @@ if __name__ == '__main__':
         print(each.name, each.age)
 
     print('\n从zip文件中的csv文件读取\n')
-    csv_in_zip_reader = CSVInZipReader('D:\\软件培训\\库\\person.zip', 'person.csv')
+    csv_in_zip_reader = CSVInZipReader('person.zip', 'person.csv')
     jos = JosephusRing(csv_in_zip_reader)
     jos.start = 3
     jos.step = 4
