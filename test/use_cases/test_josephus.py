@@ -2,8 +2,9 @@ import pytest
 
 from collections.abc import Iterable
 
-from josephus.domain.josephus import Josephus
-from josephus.share.person import Person
+from josephus.use_cases.josephus import Josephus
+from josephus.domain.person import Person
+
 
 someone1: Person = Person('Bob', 12)
 someone2: Person = Person('Jack', 13)

@@ -1,6 +1,6 @@
 from typing import List
 
-from josephus.share.person import Person
+from josephus.domain.person import Person
 
 class Josephus:
     def __init__(self):
@@ -15,7 +15,7 @@ class Josephus:
         self.people.pop(index)
 
     def query_list(self) -> List[Person]:
-        ret = []
+        ret: List[Person] = []
         temp = self.people[:]
         size = len(temp)
         if size == 0:

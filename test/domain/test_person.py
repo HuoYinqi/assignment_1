@@ -1,6 +1,6 @@
 import pytest
 
-from josephus.share.person import Person
+from josephus.domain.person import Person
 
 def test_person_init_with_parameter():
     someone = Person('Bob', 12)
