@@ -17,3 +17,9 @@ def test_person_init_without_parameter():
 def test_person_the_value_of_age_less_than_zero():
     with pytest.raises(ValueError):
         someone = Person(age=-1)
+
+def test_person_compare():
+    p1 = Person('Bob', 12)
+    p2 = Person('Bob', 12)
+
+    assert p1 == p2 

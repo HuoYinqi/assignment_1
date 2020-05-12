@@ -56,3 +56,8 @@ def test_josephus_output_order_by_next():
     with pytest.raises(StopIteration):
         next(jos)
     
+def test_josephus_init_with_reader():
+    persons = [someone1, someone2,someone3]
+    jos = Josephus(reader=persons)
+
+    assert jos.people == [someone1, someone2, someone3]

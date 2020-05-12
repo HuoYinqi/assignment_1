@@ -1,12 +1,16 @@
 from typing import List
 
+from josephus.domain.reader import Reader
 from josephus.domain.person import Person
 
 class Josephus:
-    def __init__(self):
+    def __init__(self, reader: Reader = None):
         self.start: int = 1
         self.step: int = 1
         self.people: List[Person] = []
+        if reader:
+            for each in reader:
+                self.people.append(each)
 
     def append(self, target: Person) -> None:
         self.people.append(target)
