@@ -5,10 +5,15 @@ from josephus.domain.person import Person
 
 class TxtReader(Reader):
     def __init__(self, path: str) -> None:
-        self.file = open(path)
+        try:
+            self.file = open(path)
+        except FileNotFoundError:
+            self.file = None
+            raise FileNotFoundError
 
     def __del__(self):
-        self.file.close()
+        if self.file:
+            self.file.close()
 
     def __iter__(self):
         return self
