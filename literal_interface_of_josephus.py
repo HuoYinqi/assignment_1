@@ -15,7 +15,11 @@ def creat_josephus(reader=None):
         while go_on:
             person = Person()
             person.name = input("please input name:")
-            person.age = int(input("please input age:"))
+            while True:
+                person.age = int(input("please input age:"))
+                if person.age > 0 and person.age < 100:
+                    break
+                print("invalid age! please input valid value of age from 1 to 100!")
             jos.append(person)
             go_on = int(input("please select whether to continue to input\n1: YES\t0: NO\n"))
 

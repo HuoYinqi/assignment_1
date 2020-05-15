@@ -28,6 +28,8 @@ class TxtReader(Reader):
         name = item[0]
         try:
             age = int(item[1])
+            if age < 0:
+                age = 0
         except ValueError:
             age = 0
         return Person(name, age)
