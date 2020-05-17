@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>110</y>
-      <width>301</width>
+      <width>411</width>
       <height>91</height>
      </rect>
     </property>
@@ -76,7 +76,7 @@
       <rect>
        <x>130</x>
        <y>10</y>
-       <width>113</width>
+       <width>41</width>
        <height>21</height>
       </rect>
      </property>
@@ -86,13 +86,16 @@
        <pointsize>14</pointsize>
       </font>
      </property>
+     <property name="text">
+      <string/>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_step">
      <property name="geometry">
       <rect>
        <x>130</x>
        <y>50</y>
-       <width>113</width>
+       <width>41</width>
        <height>21</height>
       </rect>
      </property>
@@ -100,6 +103,44 @@
       <font>
        <family>Times New Roman</family>
        <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_hint_start">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>10</y>
+       <width>221</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_hint_step">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>50</y>
+       <width>221</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="text">
@@ -228,10 +269,16 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>110</y>
+      <y>250</y>
       <width>401</width>
-      <height>441</height>
+      <height>301</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -242,8 +289,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QToolButton" name="toolButton_run">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>140</y>
+       <x>270</x>
+       <y>50</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -255,14 +302,14 @@ p, li { white-space: pre-wrap; }
       </font>
      </property>
      <property name="text">
-      <string>run</string>
+      <string>RUN ALL</string>
      </property>
     </widget>
     <widget class="QTextBrowser" name="textBrowser">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>140</y>
+       <x>0</x>
+       <y>0</y>
        <width>261</width>
        <height>271</height>
       </rect>
@@ -274,32 +321,11 @@ p, li { white-space: pre-wrap; }
       </font>
      </property>
     </widget>
-    <widget class="QLabel" name="label_showresult">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>100</y>
-       <width>101</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times New Roman</family>
-       <pointsize>14</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>show result</string>
-     </property>
-    </widget>
     <widget class="QToolButton" name="toolButton_quit">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>410</y>
+       <x>270</x>
+       <y>240</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -311,9 +337,68 @@ p, li { white-space: pre-wrap; }
       </font>
      </property>
      <property name="text">
-      <string>quit</string>
+      <string>Quit</string>
      </property>
     </widget>
+    <widget class="QToolButton" name="toolButton_next">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>0</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>NEXT</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="toolButton_clear">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>100</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>CLEAR</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_showresult">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>210</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>show result</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
