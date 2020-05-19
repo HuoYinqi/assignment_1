@@ -57,11 +57,11 @@ class Josephus_Window(QtWidgets.QMainWindow, Ui_MainWindow):
                     if ok:
                         if '.txt' in target_file:
                             self.reader = TxtReader.from_zip(filepath, target_file)
-                            filepath = zip_file.extract(target_file)
+                            filepath = zip_file.extract(target_file, 'data')
                         
                         elif '.csv' in target_file:
                             self.reader = CSVReader.from_zip(filepath, target_file)
-                            filepath = zip_file.extract(target_file)
+                            filepath = zip_file.extract(target_file, 'data')
                     else:
                         self.get_file()
                         return

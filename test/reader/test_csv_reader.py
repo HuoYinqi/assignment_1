@@ -2,7 +2,7 @@ from josephus.reader.csv_reader import CSVReader
 from josephus.domain.person import Person
 
 def test_csv_reader():
-    csv_reader = CSVReader('person.csv')
+    csv_reader = CSVReader('data/person.csv')
     result = []
     for each in csv_reader:
         result.append(each)
@@ -18,7 +18,7 @@ def test_csv_reader():
     ]
 
 def test_csv_reader_from_zip_file():
-    csv_reader = CSVReader.from_zip('person.zip', 'person.csv')
+    csv_reader = CSVReader.from_zip('data/person.zip', 'person.csv')
     result = []
     for each in csv_reader:
         result.append(each)

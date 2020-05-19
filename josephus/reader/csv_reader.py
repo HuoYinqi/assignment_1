@@ -35,6 +35,6 @@ class CSVReader(Reader):
     @classmethod
     def from_zip(cls, path: str, target_file: str):
         with zipfile.ZipFile(path) as zip_file:
-            target_path = zip_file.extract(target_file)
+            target_path = zip_file.extract(target_file, 'data')
 
         return cls(target_path)
