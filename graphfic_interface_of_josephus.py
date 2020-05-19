@@ -54,6 +54,11 @@ class Josephus_Window(QtWidgets.QMainWindow, Ui_MainWindow):
                         content = content + each + '\n'
                     
                     target_file, ok = QtWidgets.QInputDialog.getText(self, 'select file in zip', content)
+
+                    while target_file not in filenames and ok:
+                        QtWidgets.QMessageBox.information(self, 'Warning', 'please input correct filename!')
+                        target_file, ok = QtWidgets.QInputDialog.getText(self, 'select file in zip', content)
+
                     if ok:
                         if '.txt' in target_file:
                             self.reader = TxtReader.from_zip(filepath, target_file)
