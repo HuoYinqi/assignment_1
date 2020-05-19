@@ -5,7 +5,8 @@ class Person():
         self.name = name
         if age < 0:
             self.age = 0
-        self.age = age    
+        else:
+            self.age = age  
 
     def __eq__(self, obj):
         return self.name == obj.name and self.age == obj.age
