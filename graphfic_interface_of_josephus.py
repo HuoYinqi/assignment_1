@@ -16,7 +16,9 @@ class Josephus_Window(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.setWindowTitle('Josephus')
-        # self.reader = None
+        self.reader = None
+        self.start = 1
+        self.step = 1
         
         
         self.toolButton_file.clicked.connect(self.get_file)
@@ -92,6 +94,10 @@ class Josephus_Window(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_hint_step.setText('please input an integer')
 
     def create_josephus(self):
+        if not self.textEdit.toPlainText():
+            QtWidgets.QMessageBox.information(self, 'Warning', 'People can not be none')
+            return
+
         self.josephus = Josephus(reader=self.reader)
         self.josephus.start = self.start
         self.josephus.step = self.step
