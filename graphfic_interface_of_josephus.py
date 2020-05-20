@@ -163,19 +163,24 @@ class Josephus_Window(QtWidgets.QMainWindow, Ui_MainWindow):
             self.textBrowser.append(f'{some_one.name}, {some_one.age}')
         except StopIteration:
             self.textBrowser.append("That's all")
+        except AttributeError:
+            pass
 
 
     def run(self):
-        self.textBrowser.setText('')
-        result = self.josephus.query_list()
-        length = len(result)
-        count = 1
-        for each in result:
-            if count < length:
-                self.textBrowser.append(f'elimination\t\t{each.name}, {each.age}')
-            else:
-                self.textBrowser.append(f'winner\t\t{each.name}, {each.age}')
-            count += 1
+        try:
+            self.textBrowser.setText('')
+            result = self.josephus.query_list()
+            length = len(result)
+            count = 1
+            for each in result:
+                if count < length:
+                    self.textBrowser.append(f'elimination\t\t{each.name}, {each.age}')
+                else:
+                    self.textBrowser.append(f'winner\t\t{each.name}, {each.age}')
+                count += 1
+        except AttributeError:
+            pass
 
     def quit(self):
         QtWidgets.QApplication.exit()   
