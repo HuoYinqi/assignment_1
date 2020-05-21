@@ -4,7 +4,7 @@ from josephus.domain.reader import Reader
 from josephus.domain.person import Person
 
 class TxtReader(Reader):
-    def __init__(self, path: str) -> None:
+    def __init__(self, path):
         try:
             self.file = open(path)
         except FileNotFoundError:

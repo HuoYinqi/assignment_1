@@ -5,7 +5,7 @@ from josephus.domain.reader import Reader
 from josephus.domain.person import Person
 
 class CSVReader(Reader):
-    def __init__(self, path: str) -> None:
+    def __init__(self, path):
         try:
             self.csv_file = open(path)
             self.csv_reader = csv.reader(self.csv_file)
