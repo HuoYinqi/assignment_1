@@ -1,5 +1,3 @@
-import pytest
-
 from josephus.domain.person import Person
 
 def test_person_init_with_parameter():
