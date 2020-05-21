@@ -1,9 +1,11 @@
-from josephus.reader.txt_reader import TxtReader
+from typing import List
+
+from josephus.adapter.txt_reader import TxtReader
 from josephus.domain.person import Person
 
 def test_txt_reader():
     txt_reader = TxtReader("data/person.txt")
-    result = []
+    result: List[Person] = []
     for each in txt_reader:
         result.append(each)
 
@@ -19,7 +21,7 @@ def test_txt_reader():
 
 def test_txt_reader_from_zip_file():
     txt_reader = TxtReader.from_zip('data/person.zip', 'person.txt')
-    result = []
+    result: List[Person] = []
     for each in txt_reader:
         result.append(each)
 
