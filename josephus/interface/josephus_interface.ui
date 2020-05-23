@@ -71,7 +71,7 @@
       <string>STEP:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_start">
+    <widget class="QLineEdit" name="line_edit_start">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -90,7 +90,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_step">
+    <widget class="QLineEdit" name="line_edit_step">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -209,7 +209,7 @@
       <string>PEOPLE</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="people_info">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -232,7 +232,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton_file">
+    <widget class="QToolButton" name="button_file">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -251,7 +251,7 @@ p, li { white-space: pre-wrap; }
       <string>from file</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton_ok">
+    <widget class="QToolButton" name="button_ok">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -292,7 +292,7 @@ p, li { white-space: pre-wrap; }
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QToolButton" name="toolButton_run">
+    <widget class="QToolButton" name="button_run">
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -311,7 +311,7 @@ p, li { white-space: pre-wrap; }
       <string>RUN ALL</string>
      </property>
     </widget>
-    <widget class="QTextBrowser" name="textBrowser">
+    <widget class="QTextBrowser" name="result">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -327,7 +327,7 @@ p, li { white-space: pre-wrap; }
       </font>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton_quit">
+    <widget class="QToolButton" name="button_quit">
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -346,7 +346,7 @@ p, li { white-space: pre-wrap; }
       <string>Quit</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton_next">
+    <widget class="QToolButton" name="button_next">
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -365,7 +365,7 @@ p, li { white-space: pre-wrap; }
       <string>NEXT</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton_clear">
+    <widget class="QToolButton" name="button_clear">
      <property name="geometry">
       <rect>
        <x>270</x>

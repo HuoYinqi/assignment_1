@@ -15,15 +15,15 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle('Josephus') 
 
-        self.toolButton_file.clicked.connect(self.create_josephus_from_reader)
-        self.lineEdit_start.textChanged.connect(self.set_start_value_)
-        self.lineEdit_step.textChanged.connect(self.set_step_value_)       
-        self.toolButton_ok.clicked.connect(self.create_josephus_)
+        self.button_file.clicked.connect(self.create_josephus_from_reader)
+        self.line_edit_start.textChanged.connect(self.set_start_value_)
+        self.line_edit_step.textChanged.connect(self.set_step_value_)       
+        self.button_ok.clicked.connect(self.create_josephus_)
 
-        self.toolButton_next.clicked.connect(self.next_)
-        self.toolButton_run.clicked.connect(self.run)
-        self.toolButton_clear.clicked.connect(self.clear)
-        self.toolButton_quit.clicked.connect(self.quit)
+        self.button_next.clicked.connect(self.next_)
+        self.button_run.clicked.connect(self.run)
+        self.button_clear.clicked.connect(self.clear)
+        self.button_quit.clicked.connect(self.quit)
 
     def create_josephus_from_reader(self):
         target_file: str = ''
@@ -54,7 +54,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
             QtWidgets.QMessageBox.information(self, 'Warning','please input correct filename' )
 
         self.create_josephus()
-        self.textEdit.setText(self.get_people_info())
+        self.people_info.setText(self.get_people_info())
         try:
             self.check_strat_value()
         except ValueError:
@@ -62,7 +62,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         
     def create_josephus_(self):
         self.create_josephus()
-        content = self.textEdit.toPlainText().strip()
+        content = self.people_info.toPlainText().strip()
         if content:
             person_info = content.split('\n')
             for item in person_info:
@@ -77,7 +77,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
                     return
                 self.josephus.append(Person(name, age))  
 
-        self.textEdit.setText(self.get_people_info())
+        self.people_info.setText(self.get_people_info())
         try:
             self.check_strat_value()
         except ValueError:
@@ -123,15 +123,15 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
     def next_(self):
         try:
             some_one = next(self.josephus)
-            self.textBrowser.append(f'{some_one.name}, {some_one.age}')
+            self.result.append(f'{some_one.name}, {some_one.age}')
         except StopIteration:
-            self.textBrowser.append("That's all")
+            self.result.append("That's all")
         except AttributeError:
             pass
 
     def run(self):
         try:
-            self.textBrowser.setText(self.get_result())
+            self.result.setText(self.get_result())
         except AttributeError:
             pass
 
@@ -139,4 +139,4 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         QtWidgets.QApplication.exit()   
         
     def clear(self):
-        self.textBrowser.clear()
+        self.result.clear()
