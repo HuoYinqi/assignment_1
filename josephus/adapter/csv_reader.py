@@ -6,12 +6,10 @@ from josephus.domain.person import Person
 
 class CSVReader(Reader):
     def __init__(self, path):
-        try:
-            self.csv_file = open(path)
+        self.csv_file = None
+        self.csv_file = open(path)
+        if self.csv_file:
             self.csv_reader = csv.reader(self.csv_file)
-        except FileNotFoundError:
-            self.csv_file = None
-            raise FileNotFoundError
 
     def __del__(self):
         if self.csv_file:

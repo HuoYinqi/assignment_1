@@ -1,3 +1,4 @@
+import zipfile
 from typing import List, Optional
 
 from josephus.domain.person import Person
@@ -45,6 +46,13 @@ class Interface:
         else:
             raise FileNotFoundError
 
+    def get_namelist_from_zip(self, filepath) -> list:
+        if '.zip' in filepath:
+            with zipfile.ZipFile(filepath) as zip_file:
+                if zip_file:
+                    filenames: list = zip_file.namelist()
+                    return filenames
+
     def set_start_value(self, start: str):
         self.start = int(start)
         if self.start < 1:
@@ -60,14 +68,15 @@ class Interface:
         self.josephus.start = self.start
         self.josephus.step = self.step
 
-    def get_people_info(self) -> str:
-        people_info = ''
-        for each in self.josephus.people:
-            name = each.name
-            age = str(each.age)
-            people_info = people_info + name + ', ' + age + '\n'
+    def get_people_info(self, people) -> str:
+        if people:
+            people_info = ''
+            for each in people:
+                name = each.name
+                age = str(each.age)
+                people_info = people_info + name + ', ' + age + '\n'
 
-        return people_info
+            return people_info
 
     def get_result(self) -> str:
         temp = self.josephus.query_list()
@@ -86,8 +95,21 @@ class Interface:
         return people_info
 
     def check_strat_value(self):
-        size = len(self.josephus.people)
+        size = len(self.josephus)
         if self.josephus.start > size:
             raise ValueError
     
-        
+    def create_people_from_text(self, text: str) -> list:
+        if text:
+            people = []
+            text = text.strip()
+            persons_info = text.split('\n')
+            for item in persons_info:
+                info = item.split(',')
+                name = info[0]
+                try:
+                    age = int(info[1])
+                except ValueError:
+                    age = 0
+                people.append(Person(name, age))
+            return people

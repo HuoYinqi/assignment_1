@@ -1,5 +1,3 @@
-import sys
-import zipfile
 from PyQt5 import QtWidgets
 
 from josephus.interface.interface import Interface
@@ -15,7 +13,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle('Josephus') 
 
-        self.button_file.clicked.connect(self.create_josephus_from_reader)
+        self.button_file.clicked.connect(self.create_and_show_reader)
         self.line_edit_start.textChanged.connect(self.set_start_value_)
         self.line_edit_step.textChanged.connect(self.set_step_value_)       
         self.button_ok.clicked.connect(self.create_josephus_)
@@ -25,7 +23,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         self.button_clear.clicked.connect(self.clear)
         self.button_quit.clicked.connect(self.quit)
 
-    def create_josephus_from_reader(self):
+    def create_and_show_reader(self):
         target_file: str = ''
         filepath, _ = QtWidgets.QFileDialog.getOpenFileName(
             self,
@@ -33,56 +31,39 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
             'data',
             '*.txt *.csv *.zip'
         )
+        filenames = self.get_namelist_from_zip(filepath)       
+        if filenames:
+            content = 'please select file:\n'
+            for each in filenames:
+                content = content + each + '\n'
 
-        if not filepath:
-            return         
-        
-        elif '.zip' in filepath:
-            with zipfile.ZipFile(filepath) as zip_file:
-                filenames = zip_file.namelist()
-                content = 'please select file:\n'
-                for each in filenames:
-                    content = content + each + '\n'
-                
-                target_file, ok = QtWidgets.QInputDialog.getText(self, 'select file in zip', content)
-                if not ok:
-                    self.create_josephus_from_reader()
-                    return
+            target_file, ok = QtWidgets.QInputDialog.getText(self, 'select file in zip', content)
+            if not ok:
+                self.create_josephus_from_reader()
+                return
         try:
             self.create_reader(filepath, target_file)
         except FileNotFoundError:
             QtWidgets.QMessageBox.information(self, 'Warning','please input correct filename' )
 
-        self.create_josephus()
-        self.people_info.setText(self.get_people_info())
-        try:
-            self.check_strat_value()
-        except ValueError:
-            self.message_box_warning_start_value()
-        
+        self.people_info.setText(self.get_people_info(self.reader))
+
     def create_josephus_(self):
-        self.create_josephus()
         content = self.people_info.toPlainText().strip()
-        if content:
-            person_info = content.split('\n')
-            for item in person_info:
-                info = item.split(',')
-                name = info[0]
-                try:
-                    age = int(info[1])
-                except ValueError:
-                    age = 0
-                except IndexError:
-                    self.message_box_warning_text_format()
-                    return
-                self.josephus.append(Person(name, age))  
+        if not content:
+            return
+        self.create_josephus()
+        try:
+            self.josephus.people: list = self.create_people_from_text(content)
+        except:
+            self.message_box_warning_text_format()
+            return
 
-        self.people_info.setText(self.get_people_info())
+        self.people_info.setText(self.get_people_info(self.josephus.people))
         try:
             self.check_strat_value()
         except ValueError:
             self.message_box_warning_start_value()
-
 
     def set_start_value_(self, start):
         try:
@@ -117,7 +98,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         QtWidgets.QMessageBox.information(
                 self,
                 'Warning',
-                f'The value of start range from 1 to {len(self.josephus.people)} '
+                f'The value of start range from 1 to {len(self.josephus)} '
             )
 
     def next_(self):

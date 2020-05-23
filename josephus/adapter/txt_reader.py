@@ -5,11 +5,9 @@ from josephus.domain.person import Person
 
 class TxtReader(Reader):
     def __init__(self, path):
-        try:
-            self.file = open(path)
-        except FileNotFoundError:
-            self.file = None
-            raise FileNotFoundError
+        self.path = path
+        self.file = None
+        self.file = open(path)
 
     def __del__(self):
         if self.file:

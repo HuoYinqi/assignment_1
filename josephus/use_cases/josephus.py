@@ -43,3 +43,6 @@ class Josephus:
         self.start = index + 1
         obj = self.people.pop(index)
         return obj
+
+    def __len__(self) -> int:   
+        return len(self.people)

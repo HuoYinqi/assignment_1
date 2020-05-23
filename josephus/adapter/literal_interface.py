@@ -52,7 +52,7 @@ class LiteralUI(Interface):
 
     def show_participants(self):
         print('information of participants')
-        print(self.get_people_info())
+        print(self.get_people_info(self.josephus.people))
         
     def show_result(self):
         print('result of josephus game')
