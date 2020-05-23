@@ -39,7 +39,7 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
 
             target_file, ok = QtWidgets.QInputDialog.getText(self, 'select file in zip', content)
             if not ok:
-                self.create_josephus_from_reader()
+                self.create_and_show_reader()
                 return
         try:
             self.create_reader(filepath, target_file)
