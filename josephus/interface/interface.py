@@ -8,6 +8,11 @@ from josephus.adapter.csv_reader import CSVReader
 from josephus.use_cases.josephus import Josephus
 
 class Interface:
+    INVALID_PATH = 'abc'
+    INVALID_TARGET_FILE = 'xx'
+    INVALID_START = -1
+    INVALID_STEP = -1
+    
     def __init__(self):
         self.start: int = 1
         self.step: int = 1
@@ -16,25 +21,16 @@ class Interface:
 
     def create_reader(self, filepath=None, target_file=None) -> None:
         if not filepath:
-            self.reader = None
             return 
 
-        if not target_file:
-            if '.txt' in filepath:
-                self.reader = TxtReader(filepath)
+        if '.txt' in filepath:
+            self.reader = TxtReader(filepath)
 
-            elif '.csv' in filepath:
-                self.reader = CSVReader(filepath)
-            
-            else:
-                raise FileNotFoundError
+        elif '.csv' in filepath:
+            self.reader = CSVReader(filepath)
 
         elif '.zip' in filepath and target_file:
             self.reader_from_zip(filepath, target_file)
-
-        else:
-            raise FileNotFoundError
-
 
     def reader_from_zip(self, filepath=None, target_file=None):
         if '.txt' in target_file:
@@ -52,7 +48,8 @@ class Interface:
                 if zip_file:
                     filenames: list = zip_file.namelist()
                     return filenames
-
+        else:
+            return None
     def set_start_value(self, start: str):
         self.start = int(start)
         if self.start < 1:
@@ -95,8 +92,7 @@ class Interface:
         return people_info
 
     def check_strat_value(self):
-        size = len(self.josephus)
-        if self.josephus.start > size:
+        if self.josephus.start > len(self.josephus):
             raise ValueError
     
     def create_people_from_text(self, text: str) -> list:
