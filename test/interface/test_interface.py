@@ -163,7 +163,7 @@ def test_interface_get_result():
     interface.create_josephus()
     result = interface.get_result()
 
-    assert result == "elimination\t\tBob, 12\nwinner\t\tJack, 11\n"
+    assert result == "elimination Bob, 12\nwinner\tJack, 11\n"
 
 def test_interface_check_start_value():
     interface = Interface()
