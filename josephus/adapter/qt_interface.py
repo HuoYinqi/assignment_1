@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets
 from josephus.interface.interface import Interface
 from josephus.adapter.txt_reader import TxtReader
 from josephus.adapter.csv_reader import CSVReader
-from josephus.interface.josephus_interface import Ui_MainWindow
+from josephus.adapter.qt_interface_without_function import Ui_MainWindow
 from josephus.domain.person import Person
 from josephus.use_cases.josephus import Josephus
 
@@ -52,9 +52,8 @@ class JosephusWindow(Interface, QtWidgets.QMainWindow, Ui_MainWindow):
         content = self.people_info.toPlainText().strip()
         if not content:
             return
-        self.create_josephus()
         try:
-            self.josephus.people: list = self.create_people_from_text(content)
+            self.create_josephus(content)
         except:
             self.message_box_warning_text_format()
             return
