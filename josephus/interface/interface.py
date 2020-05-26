@@ -48,8 +48,10 @@ class Interface:
                 if zip_file:
                     filenames: list = zip_file.namelist()
                     return filenames
+                else:
+                    return []
         else:
-            return None
+            return []
     def set_start_value(self, start: str):
         self.start = int(start)
         if self.start < 1:
@@ -74,6 +76,8 @@ class Interface:
                 people_info = people_info + name + ', ' + age + '\n'
 
             return people_info
+        else:
+            return ''
 
     def get_result(self) -> str:
         temp = self.josephus.query_list()
@@ -109,3 +113,5 @@ class Interface:
                     age = 0
                 people.append(Person(name, age))
             return people
+        else:
+            return []
