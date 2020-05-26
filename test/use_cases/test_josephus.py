@@ -10,13 +10,19 @@ from josephus.domain.person import Person
 def people_example():
     return [Person('Bob', 12), Person('Jack', 13), Person('Peter', 14)]
     
-def test_josephus_init_with_reader():
+def test_josephus_init_with_reader(people_example):
     reader = mock.MagicMock()
+    reader.__iter__.return_value = people_example
     jos = Josephus(reader)
 
     reader.__iter__.assert_called_with()
     assert jos.start == 1
     assert jos.step == 1
+    assert jos.people == [
+        Person('Bob', 12),
+        Person('Jack', 13),
+        Person('Peter', 14)
+    ]
 
 def test_josephus_init_with_invalid_reader():
     reader = mock.Mock()
