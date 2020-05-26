@@ -62,8 +62,10 @@ class Interface:
         if self.step < 1:
             raise ValueError
 
-    def create_josephus(self):
+    def create_josephus(self, text=None):
         self.josephus = Josephus(self.reader)
+        if len(self.josephus) == 0:
+            self.josephus.people = self.create_people_from_text(text)
         self.josephus.start = self.start
         self.josephus.step = self.step
 
@@ -88,9 +90,9 @@ class Interface:
             name = each.name
             age = str(each.age)
             if count < size:
-                people_info = people_info + 'elimination\t\t' + name + ', ' + age + '\n'
+                people_info = people_info + 'elimination ' + name + ', ' + age + '\n'
             else:
-                people_info = people_info + 'winner\t\t' + name + ', ' + age + '\n'
+                people_info = people_info + 'winner\t' + name + ', ' + age + '\n'
             count += 1
 
         return people_info
